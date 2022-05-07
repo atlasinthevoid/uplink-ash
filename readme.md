@@ -1,8 +1,6 @@
-# Readme
+# uplink
 
 a open source multiplayer vr engine ❤️
-
-## Notice
 
 Copyright © 2022 atlasinthevoid
 
