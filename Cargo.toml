@@ -14,4 +14,7 @@ features = [
 ]
 
 [dependencies.chrono]
-version = ">= 0.4"
+version = ">= 0.4.19"
+
+[dependencies.openxr]
+version = ">= 0.16.0"
