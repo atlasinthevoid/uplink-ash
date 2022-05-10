@@ -7,15 +7,14 @@ pub mod parent;
 pub mod active_state;
 pub mod terminal;
 use std::collections::HashMap;
+use std::fmt::Display;
+use std::fmt::Formatter;
+use std::fmt::Result;
 use uuid::Uuid;
 use capability::Capability;
-use capability::Meta;
-use terminal::Terminal;
-use id::Id;
-use creation_time::CreationTime;
 
 pub struct Entity {
-    capabilities: Vec<uuid::Uuid>,
+    capabilities: Vec<Uuid>,
 }
 impl Entity {
     pub fn new() -> Entity {
@@ -23,19 +22,28 @@ impl Entity {
             capabilities: Vec::new(),
         }
     }
-    pub fn add(&mut self, value: Box<dyn Capability>){
+    pub fn attach(&mut self, value: Uuid){
         //self.capabilities.push(value)
     }
 }
 impl State {
     pub fn new_entity(&mut self) -> Uuid {
-        let id = Meta::<Id>::new();
-        let entity = Entity::new();
-        //self.entities.insert(id, entity);
-        //self.new_capability(id, Box::new());
-        //self.new_capability(id, Box::new(Meta::<CreationTime>::new()));
-        
-        id.data.id
+        let id = Capability::new_id();
+        let uuid = id.data.uuid["id"];
+        self.entities.insert(uuid, Entity::new());
+        self.new_capability(uuid, id);
+        self.new_capability(uuid, Capability::new_creation_time());
+
+        match uuid.to_string().split("-").next() {
+            Some(x) => {
+                println!("Created new entity {}", x);
+            }
+            None => {
+                println!("Created new entity <INVALID ID>");
+            }
+        }
+                
+        uuid
     }
 }
 
@@ -46,7 +54,7 @@ pub fn init(state: &mut State) {
 pub fn init_env(state: &mut State) {
     println!("Initializing default environment...");
     let computer = state.new_entity();
-    state.new_capability(computer, Box::new(Meta::<Terminal>::new()));
+    state.new_capability(computer, Capability::new_terminal());
 
     let user = state.new_entity();
     let linux = state.new_entity();
@@ -67,7 +75,7 @@ pub fn game_loop(state: &mut State) {
 // Capabilities are stored by type for performance
 pub struct State {
     entities: HashMap<Uuid, Entity>,
-    capabilities: HashMap<Uuid, Box<dyn Capability>>,
+    capabilities: HashMap<Uuid, Capability>,
     by_type: HashMap<String, Vec<Uuid>>,
     log: Vec<String>,
 }
@@ -80,7 +88,9 @@ impl State {
             log: Vec::new(),
         }
     }
-    pub fn new_capability(&mut self, entity: Uuid, capability: Box<dyn Capability>) -> Uuid {
+    pub fn new_capability(&mut self, entity: Uuid, capability: Capability) -> Uuid {
+        //let x = capability.data();
+        //println!("Created new capability {}", capability.data.string["name"]);
         Uuid::new_v4()
     }
 }
