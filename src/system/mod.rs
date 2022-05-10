@@ -5,7 +5,6 @@ pub mod id;
 pub mod name;
 pub mod parent;
 pub mod active_state;
-pub mod stateref;
 pub mod terminal;
 use std::collections::HashMap;
 use uuid::Uuid;

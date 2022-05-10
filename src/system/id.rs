@@ -5,7 +5,7 @@ use crate::system::capability::Meta;
 use crate::system::capability::MetaType;
 
 pub struct Id {
-    id: Uuid,
+    pub id: Uuid,
 }
 impl Id {
     pub fn new() -> Id {

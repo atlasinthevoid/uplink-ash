@@ -2,8 +2,8 @@ use super::Id;
 use super::CreationTime;
 
 pub struct Meta<T> {
-    meta: Vec<Box<dyn MetaType>>,
-    data: T,
+    pub meta: Vec<Box<dyn MetaType>>,
+    pub data: T,
 }
 impl <T> Meta<T> {
     pub fn base(data: T) -> Meta<T> {
