@@ -4,10 +4,7 @@ use std::fmt::Formatter;
 use std::fmt::Result;
 use uuid::Uuid;
 
-pub mod id;
-pub mod creation_time;
-pub mod terminal;
-pub mod clock;
+pub mod base;
 
 pub mod entity;
 pub use entity::Entity;
@@ -16,7 +13,7 @@ pub mod state;
 pub use state::State;
 
 pub mod capability;
-use capability::Capability;
+pub use capability::Capability;
 
 pub mod command;
 pub use command::raw_log;
