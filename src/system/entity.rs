@@ -25,10 +25,10 @@ impl State {
 
         match uuid.to_string().split("-").next() {
             Some(x) => {
-                println!("Created new entity {}", x);
+                //println!("Created new entity {}", x);
             }
             None => {
-                println!("Created new entity <INVALID ID>");
+                //println!("Created new entity <INVALID ID>");
             }
         }
                 
