@@ -23,6 +23,7 @@ use thread::sleep;
 
 pub fn init(state: &mut State) {
     init_env(state);
+    state.command("start_vr".to_string(), Uuid::new_v4());
 }
 
 pub fn init_env(state: &mut State) {
@@ -41,6 +42,7 @@ pub fn init_env(state: &mut State) {
 
     //state.status();
 }
+
 pub fn start_game_loop(state: &mut State) {
     loop {
         game_loop(state);

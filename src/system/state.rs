@@ -53,6 +53,7 @@ impl State {
             "update_terminal" => command::update_terminal::update_terminal(self, capability),
             "status" => self.status(),
             "increment" => command::increment::increment(self, capability),
+            "start_vr" => command::start_vr::start_vr(self, capability),
             "" => println!("invalid command"),
             _ => println!("invalid command"),
         }

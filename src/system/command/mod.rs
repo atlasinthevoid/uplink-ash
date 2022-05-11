@@ -2,6 +2,8 @@ pub mod update_terminal;
 pub use update_terminal::update_terminal;
 pub mod increment;
 pub use increment::increment;
+pub mod start_vr;
+pub use start_vr::start_vr;
 pub mod log;
 pub use log::log;
 pub use log::raw_log;
