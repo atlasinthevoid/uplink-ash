@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::fmt::Display;
 use std::fmt::Formatter;
 use std::fmt::Result;
-use uuid::Uuid;
+pub use uuid::Uuid;
 
 pub mod base;
 
@@ -35,10 +35,10 @@ pub fn init_env(state: &mut State) {
 
     //println!("Initializing default environment...");
 
-    let user = state.new_entity();
-    let linux = state.new_entity();
-    let discord = state.new_entity();
-    let vscodium = state.new_entity();
+    let _user = state.new_entity();
+    let _linux = state.new_entity();
+    let _discord = state.new_entity();
+    let _vscodium = state.new_entity();
 
     //state.status();
 }

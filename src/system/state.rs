@@ -6,8 +6,7 @@ use super::command;
 use std::sync::mpsc::Receiver;
 use std::io;
 use std::sync::mpsc;
-use std::sync::mpsc::TryRecvError;
-use std::{thread, time};
+use std::{thread};
 
 // Entities are stored by guid
 // Capabilities are stored by type for performance
@@ -53,7 +52,7 @@ impl State {
             "update_terminal" => command::update_terminal::update_terminal(self, capability),
             "status" => self.status(),
             "increment" => command::increment::increment(self, capability),
-            "start_vr" => command::start_vr::start_vr(self, capability),
+            "start_vr" => command::vulkan::start_vr::start_vr(self, capability),
             "" => println!("invalid command"),
             _ => println!("invalid command"),
         }

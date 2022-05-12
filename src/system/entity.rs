@@ -24,7 +24,7 @@ impl State {
         self.new_capability(uuid, Capability::new_creation_time());
 
         match uuid.to_string().split("-").next() {
-            Some(x) => {
+            Some(_x) => {
                 //println!("Created new entity {}", x);
             }
             None => {
