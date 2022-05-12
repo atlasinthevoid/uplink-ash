@@ -1,18 +1,25 @@
 use super::Uuid;
 use super::State;
 use super::Capability;
+use super::HashMap;
 
 pub struct Entity {
-    capabilities: Vec<Uuid>,
+    pub capabilities: Vec<Uuid>,
+    pub by_type: HashMap<String, Vec<Uuid>>,
 }
 impl Entity {
     pub fn new() -> Entity {
         Entity {
             capabilities: Vec::new(),
+            by_type: HashMap::new(),
         }
     }
-    pub fn attach(&mut self, value: Uuid){
-        self.capabilities.push(value)
+    pub fn attach(&mut self, value: Uuid, t: String){
+        self.capabilities.push(value);
+        if !self.by_type.contains_key(&t) {
+            self.by_type.insert(t.to_string(), Vec::new());
+        }
+        self.by_type.get_mut(&t).unwrap().push(value);
     }
 }
 impl State {

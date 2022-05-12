@@ -7,7 +7,7 @@ pub fn update_terminal(state: &mut State, capability: Uuid) {
         Ok(key) => {
             let mut command = key.to_string();
             command.pop();
-            println!("Received: {}", command);
+            //println!("Received: {}", command);
             state.command(command, capability);
         },
         Err(TryRecvError::Empty) => (),

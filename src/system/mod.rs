@@ -23,17 +23,18 @@ use thread::sleep;
 
 pub fn init(state: &mut State) {
     init_env(state);
-    state.command("start_vr".to_string(), Uuid::new_v4());
+    //state.command("start_vr".to_string(), Uuid::new_v4());
 }
 
 pub fn init_env(state: &mut State) {
-    //println!("Setting up terminal...");
+    println!("Setting up terminal...");
     let terminal = state.new_entity();
     state.new_capability(terminal, Capability::new_terminal());
+    state.new_capability(terminal, Capability::new_position(0f64, 0f64, 0f64));
 
     state.new_capability(terminal, Capability::new_clock());
 
-    //println!("Initializing default environment...");
+    println!("Initializing default environment...");
 
     let _user = state.new_entity();
     let _linux = state.new_entity();

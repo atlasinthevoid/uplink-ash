@@ -2,6 +2,8 @@ pub mod update_terminal;
 pub use update_terminal::update_terminal;
 pub mod increment;
 pub use increment::increment;
+pub mod get_position;
+pub use get_position::get_position;
 pub mod vulkan;
 pub mod log;
 pub use log::log;
