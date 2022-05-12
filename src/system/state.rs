@@ -58,6 +58,7 @@ impl State {
             "increment" => command::increment::increment(self, capability),
             "start_vr" => command::vulkan::start_vr::start_vr(self, capability),
             "get_position" => command::get_position::get_position(self, capability),
+            "get_chunk_position" => command::get_chunk_position::get_chunk_position(self, capability),
             "" => println!("invalid command"),
             _ => println!("invalid command"),
         }

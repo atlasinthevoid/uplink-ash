@@ -4,6 +4,8 @@ pub mod increment;
 pub use increment::increment;
 pub mod get_position;
 pub use get_position::get_position;
+pub mod get_chunk_position;
+pub use get_chunk_position::get_chunk_position;
 pub mod vulkan;
 pub mod log;
 pub use log::log;
