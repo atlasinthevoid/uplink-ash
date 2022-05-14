@@ -59,6 +59,8 @@ impl State {
             "start_vr" => command::vulkan::start_vr::start_vr(self, capability),
             "get_position" => command::get_position::get_position(self, capability),
             "get_chunk_position" => command::get_chunk_position::get_chunk_position(self, capability),
+            //"start_website" => command::start_website::start_website(self, capability),
+            "start_vulkan_cube" => command::vulkan::start_vulkan_cube(self, capability),
             "" => println!("invalid command"),
             _ => println!("invalid command"),
         }

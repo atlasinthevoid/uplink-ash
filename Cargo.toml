@@ -27,3 +27,21 @@ version = ">= 0.37.0"
 
 [dependencies.ctrlc]
 version = ">= 3.2.2"
+
+[dependencies.tide]
+version = ">= 0.16.0"
+
+[dependencies.async-std]
+version = ">= 1.8.0"
+features = ["attributes"]
+
+[dependencies.serde]
+version = ">= 1.0.0"
+features = ["derive"]
+
+[dependencies.cgmath]
+version = ">= 0.18.0"
+features = ["mint"]
+
+[dependencies.mint]
+mint = ">= 0.5.9"
