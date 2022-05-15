@@ -23,9 +23,9 @@ use thread::sleep;
 
 pub async fn init(state: &mut State) {
     init_env(state);
-    //state.command("start_vulkan_cube".to_string(), Uuid::new_v4());
-    let future = command::start_website::start_website();
-    future.await;
+    //let future = command::start_website::start_website();
+    //future.await;
+    state.command("start_vr".to_string(), Uuid::new_v4());
 }
 
 pub fn init_env(state: &mut State) {

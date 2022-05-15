@@ -8,7 +8,7 @@ struct Animal {
 }
 
 pub async fn start_website() -> tide::Result<()> {
-    println!("STARTING WEBSITE...");
+    println!("Initializing website...");
     let mut app = tide::new();
     app.at("/").serve_file("src/html/index.html")?;
     app.at("/").serve_dir("src/html/")?;

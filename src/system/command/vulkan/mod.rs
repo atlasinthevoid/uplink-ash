@@ -21,8 +21,14 @@ pub use start_xr_vulkan::start_xr_vulkan;
 pub mod xr_main_loop;
 pub use xr_main_loop::xr_main_loop;
 
-pub mod start_vulkan_cube;
-pub use start_vulkan_cube::start_vulkan_cube;
+pub mod vulkan_instance;
+pub use vulkan_instance::vulkan_instance;
+
+pub mod render_pass;
+pub use render_pass::render_pass;
+
+pub mod pipeline;
+pub use pipeline::pipeline;
 
 use openxr as xr;
 pub const VIEW_TYPE: xr::ViewConfigurationType = xr::ViewConfigurationType::PRIMARY_STEREO;
