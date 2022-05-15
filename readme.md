@@ -1,18 +1,54 @@
-# uplink
+<!-- markdownlint-disable-file MD033 -->
+<h1 align="center">uplink</h1>
 
-a open source multiplayer vr engine ❤️
+<div align="center">
+  <strong>peer to peer modular metaverse client</strong>
+</div>
+<div align="center">
+  using rust, websockets, openxr and vulkan 🚀
+</div>
 
-Copyright © 2022 atlasinthevoid
+<br />
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+<div align="center">
+<!-- Contributors -->
+    <a href="https://github.com/atlasinthevoid/uplink/graphs/contributors" alt="Contributors">
+        <img src="https://img.shields.io/github/contributors/atlasinthevoid/uplink" /></a>
+<!-- Activity -->
+    <a href="https://github.com/atlasinthevoid/uplink/pulse" alt="Activity">
+        <img src="https://img.shields.io/github/commit-activity/m/atlasinthevoid/uplink" /></a>
+<!-- Version -->
+    <a href="https://github.com/atlasinthevoid/uplink/releases" alt="v0.0.0">
+        <img src="https://img.shields.io/badge/version-0.0.0-green" /></a>
+<!-- Website -->
+    <a href="https://universe.void.contact" alt="universe.void.contact">
+        <img src="https://img.shields.io/badge/website-universe.void.contact-blue" /></a>
+<!-- License -->
+    <a href="https://github.com/atlasinthevoid/uplink/blob/master/license.md" alt="AGPL 3.0">
+        <img src="https://img.shields.io/badge/license-AGPL 3.0-blue" /></a>
+<!-- Platforms -->
+    <a href="https://github.com/atlasinthevoid/uplink/releases" alt="">
+        <img src="https://img.shields.io/badge/platforms-linux64-lightgrey" /></a>
+</div>
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
+<div align="center">
+  <sub>Made with 💖 by
+  <a href="https://github.com/atlasinthevoid">atlasinthevoid</a> and
+  <a href="https://github.com/atlasinthevoid/uplink/graphs/contributors">
+    contributors
+  </a>
+</div>
 
-You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
+<br>
+
+## installation
+
+```bash
+git clone https://github.com/atlasinthevoid
+cargo run
+```
+
+## features
+
+- openxr and vulkan graphics backend
+- fully featured multiplayer system using websockets
