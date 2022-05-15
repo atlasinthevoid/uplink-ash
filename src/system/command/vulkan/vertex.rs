@@ -6,7 +6,7 @@ struct Vertex {
 }
 
 impl Vertex {
-    pub fn cube(color: [f32; 3]) -> impl Iterator<Item = Self> {
+    pub async fn cube(color: [f32; 3]) -> impl Iterator<Item = Self> {
         [1, 0, 3, 2, 6, 0, 4, 1, 5, 3, 7, 6, 5, 4]
             .iter()
             .map(move |i| Self {
@@ -14,7 +14,7 @@ impl Vertex {
                 color: color.clone(),
             })
     }
-    fn get_binding_description() -> vk::VertexInputBindingDescription {
+    async fn get_binding_description() -> vk::VertexInputBindingDescription {
         vk::VertexInputBindingDescription::builder()
             .binding(0)
             .stride(mem::size_of::<Self>() as u32)
@@ -22,7 +22,7 @@ impl Vertex {
             .build()
     }
 
-    fn get_attribute_descriptions() -> [vk::VertexInputAttributeDescription; 2] {
+    async fn get_attribute_descriptions() -> [vk::VertexInputAttributeDescription; 2] {
         let position_desc = vk::VertexInputAttributeDescription::builder()
             .binding(0)
             .location(0)

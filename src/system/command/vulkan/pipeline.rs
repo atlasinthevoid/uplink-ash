@@ -7,7 +7,7 @@ use ash::{
 pub const COLOR_FORMAT: vk::Format = vk::Format::R8G8B8A8_SRGB;
 pub const VIEW_COUNT: u32 = 2;
 
-pub unsafe fn pipeline(vk_device: &ash::Device, vert: &vk::ShaderModule, frag: &vk::ShaderModule, render_pass: &vk::RenderPass) -> (vk::PipelineLayout, vk::Pipeline) {
+pub async unsafe fn pipeline(vk_device: &ash::Device, vert: &vk::ShaderModule, frag: &vk::ShaderModule, render_pass: &vk::RenderPass) -> (vk::PipelineLayout, vk::Pipeline) {
     let pipeline_layout = vk_device
     .create_pipeline_layout(
         &vk::PipelineLayoutCreateInfo::builder().set_layouts(&[]),

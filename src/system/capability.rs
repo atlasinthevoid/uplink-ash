@@ -10,7 +10,7 @@ pub struct Capability {
     pub update_commands: Vec<String>,
 }
 impl Capability {
-    pub fn new() -> Capability {
+    pub async fn new() -> Capability {
         let mut c = Capability {
             data: Data::new(),
             update_commands: Vec::new(),

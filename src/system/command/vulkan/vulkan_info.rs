@@ -1,7 +1,7 @@
 use openxr as xr;
 
 #[cfg_attr(target_os = "android", ndk_glue::main)]
-pub fn main() {
+pub async fn main() {
     #[cfg(feature = "linked")]
     let entry = xr::Entry::linked();
     #[cfg(not(feature = "linked"))]

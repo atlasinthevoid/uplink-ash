@@ -1,8 +1,8 @@
 use super::State;
 use super::Uuid;
 
-pub fn get_chunk_position(state: &mut State, capability: Uuid) {
-    let pos = state.get_sibling_by_type(capability, "position".to_string());
+pub async fn get_chunk_position(state: &mut State, capability: Uuid) {
+    let pos = state.get_sibling_by_type(capability, "position".to_string()).await;
     let x = pos.data.float["x"];
     let y = pos.data.float["y"];
     let z = pos.data.float["z"];

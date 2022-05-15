@@ -2,8 +2,8 @@ use super::Capability;
 use chrono::{Utc};
 
 impl Capability {
-    pub fn new_event() -> Capability {
-        let mut c = Capability::new();
+    pub async fn new_event() -> Capability {
+        let mut c = Capability::new().await;
         c.data.string.insert("type".to_string(), "event".to_string());
         c.data.string.insert("title".to_string(), String::new());
         c.data.string.insert("tag".to_string(), String::new());

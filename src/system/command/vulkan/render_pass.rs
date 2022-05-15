@@ -5,7 +5,7 @@ use ash::{
 pub const COLOR_FORMAT: vk::Format = vk::Format::R8G8B8A8_SRGB;
 pub const VIEW_COUNT: u32 = 2;
 
-pub unsafe fn render_pass(vk_device: &ash::Device, view_mask: &u32) -> ash::vk::RenderPass {
+pub async unsafe fn render_pass(vk_device: &ash::Device, view_mask: &u32) -> ash::vk::RenderPass {
     let render_pass = vk_device
     .create_render_pass(
         &vk::RenderPassCreateInfo::builder()

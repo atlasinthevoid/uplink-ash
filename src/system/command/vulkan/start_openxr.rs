@@ -1,6 +1,7 @@
 use openxr as xr;
+use xr::sys;
 
-pub fn start_openxr() -> (xr::Instance, xr::SystemId, xr::EnvironmentBlendMode) {
+pub async fn start_openxr() -> Result<(xr::Instance, xr::SystemId, xr::EnvironmentBlendMode), sys::Result> {
     #[cfg(feature = "static")]
     let entry = xr::Entry::linked();
     #[cfg(not(feature = "static"))]
@@ -29,18 +30,26 @@ pub fn start_openxr() -> (xr::Instance, xr::SystemId, xr::EnvironmentBlendMode) 
     {
         enabled_extensions.khr_android_create_instance = true;
     }
-    let xr_instance = entry
-        .create_instance(
-            &xr::ApplicationInfo {
-                application_name: "atlas' uplink",
-                application_version: 1,
-                engine_name: "uplink",
-                engine_version: 1,
-            },
-            &enabled_extensions,
-            &[],
-        )
-        .unwrap();
+
+    let xr_instance: xr::Instance;
+    match entry.create_instance(
+        &xr::ApplicationInfo {
+            application_name: "atlas' uplink",
+            application_version: 1,
+            engine_name: "uplink",
+            engine_version: 1,
+        },
+        &enabled_extensions,
+        &[],
+    ){
+        Ok(x) => {
+            xr_instance = x;
+        }
+        Err(e) => {
+            return Err(e)
+        }
+    }
+
     let instance_props = xr_instance.properties().unwrap();
     println!(
         "loaded OpenXR runtime: {} {}",
@@ -58,5 +67,5 @@ pub fn start_openxr() -> (xr::Instance, xr::SystemId, xr::EnvironmentBlendMode) 
         .enumerate_environment_blend_modes(system, super::VIEW_TYPE)
         .unwrap()[0];
     
-    (xr_instance, system, environment_blend_mode)
+    Ok((xr_instance, system, environment_blend_mode))
 }

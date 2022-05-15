@@ -13,7 +13,15 @@ pub async fn start_website() -> tide::Result<()> {
     app.at("/").serve_file("src/html/index.html")?;
     app.at("/").serve_dir("src/html/")?;
     app.at("/orders/shoes").post(order_shoes);
-    app.listen("127.0.0.1:8080").await?;
+    let result = app.listen("0.0.0.0:80").await;
+    match result {
+        Ok(_x) => {
+            println!("Socket created successfully");
+        }
+        Err(e) => {
+            println!("{}", e);
+        }
+    }
     Ok(())
 }
 

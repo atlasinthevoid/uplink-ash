@@ -21,7 +21,7 @@ use super::Framebuffer;
 
 const PIPELINE_DEPTH: u32 = 2;
 
-pub unsafe fn xr_main_loop(
+pub async unsafe fn xr_main_loop(
     xr_instance: &xr::Instance,
     running: &Arc<AtomicBool>,
     session: &xr::Session<xr::Vulkan>,

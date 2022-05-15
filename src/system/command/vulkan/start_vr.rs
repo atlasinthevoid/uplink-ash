@@ -11,7 +11,10 @@ use std::{
     },
 };
 
-pub fn start_vr(_state: &mut State, _capability: Uuid) {
+// DO NOT KILL THIS PROCESS
+// killing the game while this function is running with put SteamVR in an unstable state
+
+pub async fn start_vr(_state: &mut State, _capability: Uuid) {
     // Handle interrupts gracefully
     let running = Arc::new(AtomicBool::new(true));
     let r = running.clone();
@@ -21,9 +24,19 @@ pub fn start_vr(_state: &mut State, _capability: Uuid) {
     .expect("setting Ctrl-C handler");
 
     unsafe {
-        let instance = start_openxr();
-        let vulkan_instance = vulkan_instance(&instance.0, &instance.1);
-        start_xr_vulkan(instance.0, instance.1, instance.2, running, vulkan_instance.0, vulkan_instance.1, vulkan_instance.2, vulkan_instance.3);
+        init(&running).await;
     }
-    //xr_main_loop(running);
+}
+
+pub async unsafe fn init(running: &Arc<AtomicBool>) {
+    match start_openxr().await {
+        Ok(instance) => {
+            let vulkan_instance = vulkan_instance(&instance.0, &instance.1).await;
+            start_xr_vulkan(&instance.0, &instance.1, &instance.2, running, &vulkan_instance.0, &vulkan_instance.1, &vulkan_instance.2, &vulkan_instance.3).await;
+        }
+        Err(e) => {
+            println!("Fatal error while creating openxr instance: {}", e);
+        }
+    }
+
 }

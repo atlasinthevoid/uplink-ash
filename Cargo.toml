@@ -44,4 +44,7 @@ version = ">= 0.18.0"
 features = ["mint"]
 
 [dependencies.mint]
-mint = ">= 0.5.9"
+version = ">= 0.5.9"
+
+[dependencies.futures]
+version = ">= 0.3.21"
