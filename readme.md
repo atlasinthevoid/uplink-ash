@@ -44,7 +44,8 @@
 ## installation
 
 ```bash
-git clone https://github.com/atlasinthevoid
+git clone https://github.com/atlasinthevoid/uplink
+cd uplink
 cargo run
 ```
 
