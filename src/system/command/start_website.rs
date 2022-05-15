@@ -10,14 +10,11 @@ struct Animal {
 pub async fn start_website() -> tide::Result<()> {
     println!("STARTING WEBSITE...");
     let mut app = tide::new();
-    app.at("/").post(hello);
+    app.at("/").serve_file("src/html/index.html")?;
+    app.at("/").serve_dir("src/html/")?;
     app.at("/orders/shoes").post(order_shoes);
     app.listen("127.0.0.1:8080").await?;
     Ok(())
-}
-
-async fn hello(mut req: Request<()>) -> tide::Result {
-    Ok(format!("awrf <3").into())
 }
 
 async fn order_shoes(mut req: Request<()>) -> tide::Result {

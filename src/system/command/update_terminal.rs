@@ -7,8 +7,11 @@ pub fn update_terminal(state: &mut State, capability: Uuid) {
         Ok(key) => {
             let mut command = key.to_string();
             command.pop();
-            //println!("Received: {}", command);
-            state.command(command, capability);
+            if !state.capabilities[&capability].data.bool["interactive"] {
+                state.command(command, capability);
+            } else {
+                
+            }
         },
         Err(TryRecvError::Empty) => (),
         Err(TryRecvError::Disconnected) => panic!("Channel disconnected"),
