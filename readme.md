@@ -28,7 +28,7 @@
         <img src="https://img.shields.io/badge/license-AGPL 3.0-blue" /></a>
 <!-- Platforms -->
     <a href="https://github.com/atlasinthevoid/uplink/releases" alt="">
-        <img src="https://img.shields.io/badge/platforms-linux64-lightgrey" /></a>
+        <img src="https://img.shields.io/badge/platforms-linux | windows | quest | android-lightgrey" /></a>
 </div>
 
 <div align="center">
