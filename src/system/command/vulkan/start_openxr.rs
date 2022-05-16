@@ -1,7 +1,8 @@
 use openxr as xr;
 use xr::sys;
 
-pub async fn start_openxr() -> Result<(xr::Instance, xr::SystemId, xr::EnvironmentBlendMode), sys::Result> {
+pub async fn start_openxr(
+) -> Result<(xr::Instance, xr::SystemId, xr::EnvironmentBlendMode), sys::Result> {
     #[cfg(feature = "static")]
     let entry = xr::Entry::linked();
     #[cfg(not(feature = "static"))]
@@ -41,13 +42,11 @@ pub async fn start_openxr() -> Result<(xr::Instance, xr::SystemId, xr::Environme
         },
         &enabled_extensions,
         &[],
-    ){
+    ) {
         Ok(x) => {
             xr_instance = x;
         }
-        Err(e) => {
-            return Err(e)
-        }
+        Err(e) => return Err(e),
     }
 
     let instance_props = xr_instance.properties().unwrap();
@@ -66,6 +65,6 @@ pub async fn start_openxr() -> Result<(xr::Instance, xr::SystemId, xr::Environme
     let environment_blend_mode = xr_instance
         .enumerate_environment_blend_modes(system, super::VIEW_TYPE)
         .unwrap()[0];
-    
+
     Ok((xr_instance, system, environment_blend_mode))
 }

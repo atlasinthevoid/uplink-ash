@@ -7,10 +7,7 @@
 
 use std::{
     io::Cursor,
-    sync::{
-        atomic::{AtomicBool},
-        Arc,
-    },
+    sync::{atomic::AtomicBool, Arc},
 };
 
 use ash::{
@@ -19,8 +16,8 @@ use ash::{
 };
 use openxr as xr;
 
-use super::render_pass;
 use super::pipeline;
+use super::render_pass;
 
 use super::xr_main_loop;
 
@@ -32,13 +29,25 @@ const PIPELINE_DEPTH: u32 = 2;
 
 #[allow(clippy::field_reassign_with_default)] // False positive, might be fixed 1.51
 #[cfg_attr(target_os = "android", ndk_glue::main)]
-pub async unsafe fn start_xr_vulkan(xr_instance: &xr::Instance, system: &xr::SystemId, environment_blend_mode: &xr::EnvironmentBlendMode, running: &Arc<AtomicBool>, vk_instance: &ash::Instance, vk_device: &ash::Device, queue_family_index: &u32, vk_physical_device: &ash::vk::PhysicalDevice) {
+pub async unsafe fn start_xr_vulkan(
+    xr_instance: &xr::Instance,
+    system: &xr::SystemId,
+    environment_blend_mode: &xr::EnvironmentBlendMode,
+    running: &Arc<AtomicBool>,
+    vk_instance: &ash::Instance,
+    vk_device: &ash::Device,
+    queue_family_index: &u32,
+    vk_physical_device: &ash::vk::PhysicalDevice,
+) {
     let queue = vk_device.get_device_queue(*queue_family_index, 0);
 
     let view_mask = !(!0 << VIEW_COUNT);
     let render_pass = render_pass(&vk_device, &view_mask).await;
 
-    let vert = read_spv(&mut Cursor::new(&include_bytes!("../../../shader/fullscreen.vert.spv")[..])).unwrap();
+    let vert = read_spv(&mut Cursor::new(
+        &include_bytes!("../../../shader/fullscreen.vert.spv")[..],
+    ))
+    .unwrap();
     let frag = read_spv(&mut Cursor::new(
         &include_bytes!("../../../shader/debug_pattern.frag.spv")[..],
     ))
@@ -157,10 +166,28 @@ pub async unsafe fn start_xr_vulkan(xr_instance: &xr::Instance, system: &xr::Sys
         })
         .collect::<Vec<_>>();
 
-    let swapchain = xr_main_loop(xr_instance, running, &session, &mut frame_wait,
-        &mut frame_stream, environment_blend_mode, system, vk_device, &render_pass, &stage,
-        &fences, &cmds, &pipeline, &action_set, &right_space, &left_space, &right_action, &left_action,
-        &queue).await;
+    let swapchain = xr_main_loop(
+        xr_instance,
+        running,
+        &session,
+        &mut frame_wait,
+        &mut frame_stream,
+        environment_blend_mode,
+        system,
+        vk_device,
+        &render_pass,
+        &stage,
+        &fences,
+        &cmds,
+        &pipeline,
+        &action_set,
+        &right_space,
+        &left_space,
+        &right_action,
+        &left_action,
+        &queue,
+    )
+    .await;
     // OpenXR MUST be allowed to clean up before we destroy Vulkan resources it could touch, so
     // first we must drop all its handles.
     drop((

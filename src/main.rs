@@ -1,8 +1,8 @@
 pub mod system;
-use system::raw_log;
-use system::State;
 use system::init;
+use system::raw_log;
 use system::start_game_loop;
+use system::State;
 
 #[async_std::main]
 async fn main() {

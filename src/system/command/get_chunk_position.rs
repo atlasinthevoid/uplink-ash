@@ -2,7 +2,9 @@ use super::State;
 use super::Uuid;
 
 pub async fn get_chunk_position(state: &mut State, capability: Uuid) {
-    let pos = state.get_sibling_by_type(capability, "position".to_string()).await;
+    let pos = state
+        .get_sibling_by_type(capability, "position".to_string())
+        .await;
     let x = pos.data.float["x"];
     let y = pos.data.float["y"];
     let z = pos.data.float["z"];
@@ -12,11 +14,10 @@ pub async fn get_chunk_position(state: &mut State, capability: Uuid) {
     let mut chunk_x: f64;
     let mut chunk_y: f64;
     let mut chunk_z: f64;
-    if x/size > zero {
-        chunk_x = (x/size).floor();
-    }
-    else {
-        chunk_x = (x/size).ceil();
+    if x / size > zero {
+        chunk_x = (x / size).floor();
+    } else {
+        chunk_x = (x / size).ceil();
     }
 
     // Fix for negitive 0 (-0.0)
@@ -24,11 +25,10 @@ pub async fn get_chunk_position(state: &mut State, capability: Uuid) {
         chunk_x = zero;
     }
 
-    if y/size > zero {
-        chunk_y = (y/size).floor();
-    }
-    else {
-        chunk_y = (y/size).ceil();
+    if y / size > zero {
+        chunk_y = (y / size).floor();
+    } else {
+        chunk_y = (y / size).ceil();
     }
 
     // Fix for negitive 0 (-0.0)
@@ -36,11 +36,10 @@ pub async fn get_chunk_position(state: &mut State, capability: Uuid) {
         chunk_y = zero;
     }
 
-    if z/size > zero {
-        chunk_z = (z/size).floor();
-    }
-    else {
-        chunk_z = (z/size).ceil();
+    if z / size > zero {
+        chunk_z = (z / size).floor();
+    } else {
+        chunk_z = (z / size).ceil();
     }
 
     // Fix for negitive 0 (-0.0)

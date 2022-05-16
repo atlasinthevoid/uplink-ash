@@ -1,9 +1,9 @@
-use super::HashMap;
-use super::Uuid;
-use chrono::{DateTime, Utc};
 use super::Display;
 use super::Formatter;
+use super::HashMap;
 use super::Result;
+use super::Uuid;
+use chrono::{DateTime, Utc};
 
 pub struct Capability {
     pub data: Data,
@@ -16,7 +16,9 @@ impl Capability {
             update_commands: Vec::new(),
         };
         c.data.uuid.insert("id".to_string(), Uuid::new_v4());
-        c.data.date_time.insert("creation time".to_string(), Utc::now());
+        c.data
+            .date_time
+            .insert("creation time".to_string(), Utc::now());
         c
     }
 }
@@ -43,9 +45,9 @@ pub struct Data {
     pub uuid_array: HashMap<String, Vec<Uuid>>,
     pub date_time_array: HashMap<String, DateTime<Utc>>,
 }
-impl Data  {
+impl Data {
     fn new() -> Data {
-        Data  {
+        Data {
             int: HashMap::new(),
             signed_int: HashMap::new(),
             float: HashMap::new(),
@@ -66,8 +68,23 @@ impl Data  {
 }
 impl Display for Data {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
-        write!(f, "{:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?}", 
-            self.int, self.signed_int, self.float, self.bool, self.string, self.uuid, self.date_time,
-            self.int_array, self.signed_int_array, self.float_array, self.bool_array, self.string_array, self.uuid_array, self.date_time_array)
+        write!(
+            f,
+            "{:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?} {:?}",
+            self.int,
+            self.signed_int,
+            self.float,
+            self.bool,
+            self.string,
+            self.uuid,
+            self.date_time,
+            self.int_array,
+            self.signed_int_array,
+            self.float_array,
+            self.bool_array,
+            self.string_array,
+            self.uuid_array,
+            self.date_time_array
+        )
     }
 }

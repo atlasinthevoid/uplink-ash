@@ -1,19 +1,20 @@
-
-
-use ash::{
-    vk::{self},
-};
+use ash::vk::{self};
 
 pub const COLOR_FORMAT: vk::Format = vk::Format::R8G8B8A8_SRGB;
 pub const VIEW_COUNT: u32 = 2;
 
-pub async unsafe fn pipeline(vk_device: &ash::Device, vert: &vk::ShaderModule, frag: &vk::ShaderModule, render_pass: &vk::RenderPass) -> (vk::PipelineLayout, vk::Pipeline) {
+pub async unsafe fn pipeline(
+    vk_device: &ash::Device,
+    vert: &vk::ShaderModule,
+    frag: &vk::ShaderModule,
+    render_pass: &vk::RenderPass,
+) -> (vk::PipelineLayout, vk::Pipeline) {
     let pipeline_layout = vk_device
-    .create_pipeline_layout(
-        &vk::PipelineLayoutCreateInfo::builder().set_layouts(&[]),
-        None,
-    )
-    .unwrap();
+        .create_pipeline_layout(
+            &vk::PipelineLayoutCreateInfo::builder().set_layouts(&[]),
+            None,
+        )
+        .unwrap();
     let noop_stencil_state = vk::StencilOpState {
         fail_op: vk::StencilOp::KEEP,
         pass_op: vk::StencilOp::KEEP,
@@ -83,10 +84,8 @@ pub async unsafe fn pipeline(vk_device: &ash::Device, vert: &vk::ShaderModule, f
                     ]),
                 )
                 .dynamic_state(
-                    &vk::PipelineDynamicStateCreateInfo::builder().dynamic_states(&[
-                        vk::DynamicState::VIEWPORT,
-                        vk::DynamicState::SCISSOR,
-                    ]),
+                    &vk::PipelineDynamicStateCreateInfo::builder()
+                        .dynamic_states(&[vk::DynamicState::VIEWPORT, vk::DynamicState::SCISSOR]),
                 )
                 .layout(pipeline_layout)
                 .render_pass(*render_pass)

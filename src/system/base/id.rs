@@ -1,5 +1,5 @@
-use uuid::Uuid;
 use super::Capability;
+use uuid::Uuid;
 
 impl Capability {
     pub async fn new_id() -> Capability {

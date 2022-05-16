@@ -1,7 +1,7 @@
-use super::Uuid;
-use super::State;
 use super::Capability;
 use super::HashMap;
+use super::State;
+use super::Uuid;
 
 pub struct Entity {
     pub capabilities: Vec<Uuid>,
@@ -14,7 +14,7 @@ impl Entity {
             by_type: HashMap::new(),
         }
     }
-    pub async fn attach(&mut self, value: Uuid, t: String){
+    pub async fn attach(&mut self, value: Uuid, t: String) {
         self.capabilities.push(value);
         if !self.by_type.contains_key(&t) {
             self.by_type.insert(t.to_string(), Vec::new());
@@ -28,7 +28,8 @@ impl State {
         let uuid = id.data.uuid["id"];
         self.entities.insert(uuid, Entity::new().await);
         self.new_capability(uuid, id).await;
-        self.new_capability(uuid, Capability::new_creation_time().await).await;
+        self.new_capability(uuid, Capability::new_creation_time().await)
+            .await;
 
         match uuid.to_string().split("-").next() {
             Some(_x) => {
@@ -38,7 +39,7 @@ impl State {
                 //println!("Created new entity <INVALID ID>");
             }
         }
-                
+
         uuid
     }
 }

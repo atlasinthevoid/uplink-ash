@@ -10,9 +10,8 @@ pub async fn update_terminal(state: &mut State, capability: Uuid) {
             if !state.capabilities[&capability].data.bool["interactive"] {
                 //state.command(command, capability);
             } else {
-                
             }
-        },
+        }
         Err(TryRecvError::Empty) => (),
         Err(TryRecvError::Disconnected) => panic!("Channel disconnected"),
     }

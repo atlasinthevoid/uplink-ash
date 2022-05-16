@@ -1,23 +1,17 @@
-use std::{
-    sync::{
-        atomic::{AtomicBool, Ordering},
-        Arc,
-    },
+use std::sync::{
+    atomic::{AtomicBool, Ordering},
+    Arc,
 };
 
-use ash::{
-    vk::{self, Handle},
-};
+use ash::vk::{self, Handle};
 use openxr as xr;
 
-use std::{
-    time::Duration,
-};
+use std::time::Duration;
 
 pub const VIEW_COUNT: u32 = 2;
 pub const COLOR_FORMAT: vk::Format = vk::Format::R8G8B8A8_SRGB;
-use super::Swapchain;
 use super::Framebuffer;
+use super::Swapchain;
 
 const PIPELINE_DEPTH: u32 = 2;
 
@@ -40,7 +34,7 @@ pub async unsafe fn xr_main_loop(
     left_space: &xr::Space,
     right_action: &xr::Action<xr::Posef>,
     left_action: &xr::Action<xr::Posef>,
-    queue: &vk::Queue
+    queue: &vk::Queue,
 ) -> Option<Swapchain> {
     // Main loop
     let mut swapchain = None;
@@ -303,7 +297,11 @@ pub async unsafe fn xr_main_loop(
         // to the GPU just-in-time by writing them to per-frame host-visible memory which the
         // GPU will only read once the command buffer is submitted.
         let (_, views) = session
-            .locate_views(super::VIEW_TYPE, xr_frame_state.predicted_display_time, &stage)
+            .locate_views(
+                super::VIEW_TYPE,
+                xr_frame_state.predicted_display_time,
+                &stage,
+            )
             .unwrap();
 
         // Submit commands to the GPU, then tell OpenXR we're done with our part.

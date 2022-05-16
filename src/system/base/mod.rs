@@ -1,7 +1,7 @@
-pub mod id;
-pub mod creation_time;
-pub mod terminal;
 pub mod clock;
-pub mod position;
+pub mod creation_time;
 pub mod event;
+pub mod id;
+pub mod position;
+pub mod terminal;
 pub use super::Capability;

@@ -1,12 +1,13 @@
-use ash::{
-    vk::{self, Handle},
-};
+use ash::vk::{self, Handle};
 use openxr as xr;
 
 pub const COLOR_FORMAT: vk::Format = vk::Format::R8G8B8A8_SRGB;
 pub const VIEW_COUNT: u32 = 2;
 
-pub async unsafe fn vulkan_instance(xr_instance: &xr::Instance, system: &xr::SystemId, ) -> (ash::Instance, ash::Device, u32, ash::vk::PhysicalDevice) {
+pub async unsafe fn vulkan_instance(
+    xr_instance: &xr::Instance,
+    system: &xr::SystemId,
+) -> (ash::Instance, ash::Device, u32, ash::vk::PhysicalDevice) {
     // OpenXR wants to ensure apps are using the correct graphics card and Vulkan features and
     // extensions, so the instance and device MUST be set up before Instance::create_session.
 
@@ -98,5 +99,10 @@ pub async unsafe fn vulkan_instance(xr_instance: &xr::Instance, system: &xr::Sys
 
         ash::Device::load(vk_instance.fp_v1_0(), vk::Device::from_raw(vk_device as _))
     };
-    (vk_instance, vk_device, queue_family_index, vk_physical_device)
+    (
+        vk_instance,
+        vk_device,
+        queue_family_index,
+        vk_physical_device,
+    )
 }

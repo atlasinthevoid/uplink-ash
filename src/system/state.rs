@@ -1,12 +1,12 @@
-use super::HashMap;
-use super::Entity;
-use super::Uuid;
-use super::Capability;
 use super::command;
-use std::sync::mpsc::Receiver;
+use super::Capability;
+use super::Entity;
+use super::HashMap;
+use super::Uuid;
 use std::io;
 use std::sync::mpsc;
-use std::{thread};
+use std::sync::mpsc::Receiver;
+use std::thread;
 
 // Entities are stored by guid
 // Capabilities are stored by type for performance
@@ -33,8 +33,12 @@ impl State {
         let id = capability.data.uuid["id"];
         self.capabilities.insert(id, capability);
         let t = &self.capabilities[&id].data.string["type"];
-        self.entities.get_mut(&entity).unwrap().attach(id, t.to_string()).await;
-        
+        self.entities
+            .get_mut(&entity)
+            .unwrap()
+            .attach(id, t.to_string())
+            .await;
+
         if !self.by_type.contains_key(t) {
             self.by_type.insert(t.to_string(), Vec::new());
         }
@@ -58,7 +62,9 @@ impl State {
             "increment" => command::increment::increment(self, capability).await,
             "start_vr" => command::vulkan::start_vr::start_vr(self, capability).await,
             "get_position" => command::get_position::get_position(self, capability).await,
-            "get_chunk_position" => command::get_chunk_position::get_chunk_position(self, capability).await,
+            "get_chunk_position" => {
+                command::get_chunk_position::get_chunk_position(self, capability).await
+            }
             //"start_website" => command::start_website::start_website(self, capability),
             //"start_vulkan_cube" => command::vulkan::start_vulkan_cube(self, capability),
             "create_event" => command::create_event(self, capability).await,
@@ -66,15 +72,18 @@ impl State {
             _ => println!("invalid command"),
         }
     }
-    pub async fn status(& self) {
+    pub async fn status(&self) {
         println!("State contains: ");
-        println!("  {} ticks", self.capabilities[&self.by_type["clock"][0]].data.int["ticks"]);
+        println!(
+            "  {} ticks",
+            self.capabilities[&self.by_type["clock"][0]].data.int["ticks"]
+        );
         println!("  {} entities", self.entities.len());
         println!("  {} capabilities", self.capabilities.len());
         println!("  {} types", self.by_type.len());
         println!("  {} log lines", self.log.len());
     }
-    pub async fn get_sibling_by_type(& self, capability: Uuid, t: String) -> &Capability {
+    pub async fn get_sibling_by_type(&self, capability: Uuid, t: String) -> &Capability {
         &self.capabilities[&self.entities[&self.get_entity[&capability]].by_type[&t][0]]
     }
 }

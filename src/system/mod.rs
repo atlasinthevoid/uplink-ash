@@ -18,23 +18,32 @@ pub use capability::Capability;
 pub mod command;
 pub use command::raw_log;
 
+use futures::future;
 use std::{thread, time};
-use thread::sleep;
-use futures::{future}; // 0.3.5
+use thread::sleep; // 0.3.5
 
 pub async fn init(state: &mut State) {
     init_env(state).await;
-let (_a, _b) = future::join(command::start_website::start_website(), state.command("start_vr".to_string(), Uuid::new_v4())).await;
-    
+    let (_a, _b) = future::join(
+        command::start_website::start_website(),
+        state.command("start_vr".to_string(), Uuid::new_v4()),
+    )
+    .await;
 }
 
 pub async fn init_env(state: &mut State) {
     println!("Setting up uplink terminal...");
     let terminal = state.new_entity().await;
-    state.new_capability(terminal, Capability::new_terminal().await).await;
-    state.new_capability(terminal, Capability::new_position(0f64, 0f64, 0f64).await).await;
+    state
+        .new_capability(terminal, Capability::new_terminal().await)
+        .await;
+    state
+        .new_capability(terminal, Capability::new_position(0f64, 0f64, 0f64).await)
+        .await;
 
-    state.new_capability(terminal, Capability::new_clock().await).await;
+    state
+        .new_capability(terminal, Capability::new_clock().await)
+        .await;
 
     println!("Initializing default computer...");
 
@@ -75,7 +84,7 @@ pub async fn update(state: &mut State) {
     }
 }
 
-pub async fn serialise_game_object(){
+pub async fn serialise_game_object() {
     //for (i, arg) in args.iter().enumerate() {
     //
     //}

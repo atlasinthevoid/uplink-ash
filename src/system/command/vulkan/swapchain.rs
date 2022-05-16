@@ -1,7 +1,5 @@
-use ash::{
-    vk::{self},
-};
 use super::Framebuffer;
+use ash::vk::{self};
 use openxr as xr;
 
 pub struct Swapchain {

@@ -1,6 +1,4 @@
-use ash::{
-    vk::{self},
-};
+use ash::vk::{self};
 
 pub struct Framebuffer {
     pub framebuffer: vk::Framebuffer,
