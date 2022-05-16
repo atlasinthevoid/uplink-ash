@@ -1,4 +1,7 @@
 <!-- markdownlint-disable-file MD033 -->
+
+> awrf 💖 this repoistory has been archived. Continued development is located at https://github.com/atlasinthevoid/uplink which uses the Godot Engine for rendering.
+
 <h1 align="center">uplink</h1>
 
 <div align="center">
